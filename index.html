@@ -4,133 +4,154 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kshitij Sharma — Developer & Security</title>
-  <meta name="description" content="Kshitij Sharma — software developer exploring cybersecurity. Co-Founder & CTO at Okynus.tech. Java, networking, VAPT, DRM." />
+  <meta name="description" content="Kshitij Sharma — software developer & security student. Co-Founder & CTO at Okynus.tech. Java, networking, VAPT, DRM." />
   <meta name="author" content="Kshitij Sharma" />
+  <meta name="theme-color" content="#0a0b0d" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Kshitij Sharma — Developer & Security" />
-  <meta property="og:description" content="Software developer exploring cybersecurity — Co-Founder & CTO at Okynus.tech." />
+  <meta property="og:description" content="Software developer & security student — Co-Founder & CTO at Okynus.tech." />
   <meta property="og:url" content="https://sharma-prayash.github.io/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <!-- Scroll progress / preloader -->
-  <div class="preloader" id="preloader">
-    <div class="preloader__mark">A</div>
+  <!-- ===== Boot / preloader ===== -->
+  <div class="boot" id="boot">
+    <div class="boot__inner">
+      <div class="boot__mark">A</div>
+      <div class="boot__log" id="bootLog"></div>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+    </div>
   </div>
 
-  <!-- Right-edge technical ruler -->
+  <!-- ===== Persistent HUD (decorative, non-interactive) ===== -->
+  <div class="hud" aria-hidden="true">
+    <div class="hud__grid"><i></i><i></i><i></i><i></i></div>
+    <span class="hud__corner tl"></span>
+    <span class="hud__corner tr"></span>
+    <span class="hud__corner bl"></span>
+    <span class="hud__corner br"></span>
+    <div class="hud__cross" id="hudCross"></div>
+  </div>
+
+  <!-- ===== Right-edge measurement ruler ===== -->
   <aside class="ruler" aria-hidden="true">
-    <div class="ruler__track" id="rulerTrack"></div>
-    <div class="ruler__indicator" id="rulerIndicator">
-      <span class="ruler__pct" id="rulerPct">000</span><span class="ruler__unit">%</span>
-    </div>
+    <div class="ruler__scale" id="rulerScale"></div>
+    <div class="ruler__cursor" id="rulerCursor"><b id="rulerPct">000</b>%</div>
   </aside>
 
-  <!-- Rotated active-section label -->
-  <div class="edge-label" id="edgeLabel" aria-hidden="true">INDEX</div>
+  <!-- rotated active-section label -->
+  <div class="edge" id="edge" aria-hidden="true">IDENTITY</div>
 
-  <!-- Section index (bottom-right dot nav) -->
-  <nav class="sideindex" aria-label="Section navigation">
-    <a href="#about" data-label="About"><span class="sideindex__num">01</span><span class="sideindex__dot"></span></a>
-    <a href="#skills" data-label="Skills"><span class="sideindex__num">02</span><span class="sideindex__dot"></span></a>
-    <a href="#experience" data-label="Experience"><span class="sideindex__num">03</span><span class="sideindex__dot"></span></a>
-    <a href="#projects" data-label="Projects"><span class="sideindex__num">04</span><span class="sideindex__dot"></span></a>
-    <a href="#recognition" data-label="Recognition"><span class="sideindex__num">05</span><span class="sideindex__dot"></span></a>
-    <a href="#beyond" data-label="Beyond"><span class="sideindex__num">06</span><span class="sideindex__dot"></span></a>
-    <a href="#contact" data-label="Contact"><span class="sideindex__num">07</span><span class="sideindex__dot"></span></a>
+  <!-- ===== Left section index ===== -->
+  <nav class="dots" aria-label="Section navigation">
+    <a href="#identity"   data-label="Identity"><i>01</i><s></s></a>
+    <a href="#arsenal"    data-label="Arsenal"><i>02</i><s></s></a>
+    <a href="#fieldlog"   data-label="Field Log"><i>03</i><s></s></a>
+    <a href="#builds"     data-label="Builds"><i>04</i><s></s></a>
+    <a href="#credentials"data-label="Credentials"><i>05</i><s></s></a>
+    <a href="#offduty"    data-label="Off-Duty"><i>06</i><s></s></a>
+    <a href="#contact"    data-label="Contact"><i>07</i><s></s></a>
   </nav>
 
-  <!-- Top navigation -->
-  <header class="nav" id="nav">
-    <a class="nav__brand" href="#top" aria-label="Home">
-      <span class="nav__logo">A</span>
-      <span class="nav__brandtext">KSHITIJ<span class="nav__brandthin">.SHARMA</span></span>
+  <!-- ===== Top status bar / nav ===== -->
+  <header class="bar" id="bar">
+    <a class="bar__brand" href="#top" aria-label="Home">
+      <span class="bar__mark">A</span>
+      <span class="bar__id">KSHITIJ_SHARMA<em>// SEC · DEV</em></span>
     </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#recognition">Recognition</a>
+    <nav class="bar__nav" aria-label="Primary">
+      <a href="#identity">Identity</a>
+      <a href="#arsenal">Arsenal</a>
+      <a href="#fieldlog">Field&nbsp;Log</a>
+      <a href="#builds">Builds</a>
+      <a href="#credentials">Credentials</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="nav__actions">
-      <button class="nav__theme" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    <div class="bar__meta">
+      <span class="bar__stat"><b class="dot"></b> ONLINE</span>
+      <span class="bar__clock" id="clock">--:--:-- IST</span>
+      <button class="bar__theme" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="i-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
-      <a class="nav__cta" href="#contact">GET IN TOUCH</a>
-      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <button class="bar__burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
   </header>
 
-  <!-- Mobile menu -->
-  <div class="mobilemenu" id="mobilemenu">
-    <a href="#about"><span>01</span> About</a>
-    <a href="#skills"><span>02</span> Skills</a>
-    <a href="#experience"><span>03</span> Experience</a>
-    <a href="#projects"><span>04</span> Projects</a>
-    <a href="#recognition"><span>05</span> Recognition</a>
-    <a href="#beyond"><span>06</span> Beyond</a>
+  <!-- ===== Mobile menu ===== -->
+  <div class="sheet" id="sheet">
+    <a href="#identity"><span>01</span> Identity</a>
+    <a href="#arsenal"><span>02</span> Arsenal</a>
+    <a href="#fieldlog"><span>03</span> Field Log</a>
+    <a href="#builds"><span>04</span> Builds</a>
+    <a href="#credentials"><span>05</span> Credentials</a>
+    <a href="#offduty"><span>06</span> Off-Duty</a>
     <a href="#contact"><span>07</span> Contact</a>
   </div>
 
   <main id="top">
     <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="hero__grid">
-        <div class="hero__left reveal">
-          <p class="eyebrow">DEVELOPER <span>•</span> SECURITY <span>•</span> BUILDER</p>
-          <h1 class="hero__title">
-            I build software<br />
-            and take it <em>apart</em><br />
-            to see how it works.
-          </h1>
-          <p class="hero__lede">
-            Kshitij Sharma — software developer exploring cybersecurity, and
-            Co-Founder &amp; CTO at <span class="hl">Okynus.tech</span>. I write
-            code, dig into the under-the-hood logic, and keep expanding my craft
-            across networking and VAPT.
-          </p>
-          <div class="hero__cta">
-            <a href="#projects" class="btn btn--primary">View my work <span class="btn__arrow">→</span></a>
-            <a href="#contact" class="btn btn--ghost">Get in touch</a>
-          </div>
-          <dl class="hero__stats">
-            <div><dt>8.5</dt><dd>CGPA · NFSU</dd></div>
-            <div><dt>2nd</dt><dd>of 170 teams</dd></div>
-            <div><dt>21km</dt><dd>half marathon</dd></div>
+    <section class="hero" id="hero" data-label="Index">
+      <div class="hero__tags">
+        <span>// SYSTEM_ONLINE</span>
+        <span>LAT 23.2°N · LON 72.6°E</span>
+        <span>CLEARANCE: STUDENT</span>
+      </div>
+      <div class="hero__main">
+        <p class="hero__role"><span class="tick"></span> SOFTWARE DEVELOPER <em>&amp;</em> SECURITY STUDENT</p>
+        <h1 class="hero__title">
+          <span class="scramble" data-text="I build software">I build software</span><br />
+          <span class="scramble" data-text="and study how it">and study how it</span>
+          <em>breaks.</em>
+        </h1>
+        <p class="hero__lede">
+          Kshitij Sharma — a developer who codes, then digs into the
+          under-the-hood logic to understand how it can be broken and defended.
+          Co-Founder &amp; CTO at <span class="hl">Okynus.tech</span>, expanding
+          across networking and VAPT.
+        </p>
+        <div class="hero__cta">
+          <a href="#builds" class="btn btn--acc">View builds <span class="btn__a">→</span></a>
+          <a href="#contact" class="btn">Establish contact</a>
+        </div>
+      </div>
+
+      <!-- dossier + terminal -->
+      <aside class="hero__side">
+        <div class="dossier">
+          <div class="dossier__head"><span>DOSSIER</span><span>REF-07</span></div>
+          <dl class="dossier__rows">
+            <div><dt>ALIAS</dt><dd>stryver</dd></div>
+            <div><dt>ROLE</dt><dd>Dev · Security</dd></div>
+            <div><dt>BASE</dt><dd>Gujarat, IN</dd></div>
+            <div><dt>FOCUS</dt><dd>VAPT · Networks · DRM</dd></div>
+            <div><dt>EDU</dt><dd>B.Tech–M.Tech CSE · NFSU</dd></div>
+            <div><dt>STATUS</dt><dd class="ok">Open to work</dd></div>
           </dl>
         </div>
-
-        <!-- Terminal panel -->
-        <div class="hero__right reveal">
-          <div class="terminal" id="terminal">
-            <div class="terminal__bar">
-              <span class="terminal__dots"><i></i><i></i><i></i></span>
-              <span class="terminal__title">stryver@portfolio: ~</span>
-            </div>
-            <div class="terminal__body" id="terminalBody"></div>
-          </div>
+        <div class="terminal">
+          <div class="terminal__bar"><i></i><i></i><i></i><span>stryver@portfolio: ~</span></div>
+          <div class="terminal__body" id="term"></div>
         </div>
-      </div>
-      <div class="hero__scrollcue"><span>SCROLL</span><i></i></div>
+      </aside>
+
+      <div class="hero__cue"><span>SCROLL</span><i></i></div>
     </section>
 
-    <!-- ============ 01 · ABOUT ============ -->
-    <section class="section" id="about" data-index="01" data-label="About">
-      <div class="section__head">
-        <p class="kicker"><span>01</span> / ABOUT</p>
-        <h2 class="section__title">A developer with a <em>security</em> mindset.</h2>
+    <!-- ============ 01 · IDENTITY ============ -->
+    <section class="sec" id="identity" data-label="Identity">
+      <div class="sec__head">
+        <p class="kick"><span>01</span> / IDENTITY <em>· whoami</em></p>
+        <h2 class="sec__title scramble" data-text="A developer with a">A developer with a</h2>
+        <h2 class="sec__title sec__title--2">security <em>instinct.</em></h2>
       </div>
-      <div class="about">
-        <div class="about__text reveal">
+      <div class="idwrap">
+        <div class="idwrap__text">
           <p>
             I'm a software developer with a keen interest in cybersecurity,
             currently pursuing an integrated B.Tech–M.Tech in Computer Science
@@ -144,19 +165,19 @@
             of technology.
           </p>
         </div>
-        <div class="about__cards">
-          <article class="minicard reveal">
-            <span class="minicard__ico">🎓</span>
+        <div class="idwrap__cards">
+          <article class="card">
+            <span class="card__no">/01</span>
             <h3>NFSU, Gandhinagar</h3>
             <p>B.Tech–M.Tech CSE (Cybersecurity) · CGPA 8.5</p>
           </article>
-          <article class="minicard reveal">
-            <span class="minicard__ico">🚀</span>
+          <article class="card">
+            <span class="card__no">/02</span>
             <h3>Co-Founder &amp; CTO</h3>
             <p>Okynus.tech — DRM &amp; anti-piracy</p>
           </article>
-          <article class="minicard reveal">
-            <span class="minicard__ico">📍</span>
+          <article class="card">
+            <span class="card__no">/03</span>
             <h3>Based in Gujarat, India</h3>
             <p>Open to security &amp; dev opportunities</p>
           </article>
@@ -164,27 +185,28 @@
       </div>
     </section>
 
-    <!-- ============ 02 · SKILLS ============ -->
-    <section class="section" id="skills" data-index="02" data-label="Skills">
-      <div class="section__head">
-        <p class="kicker"><span>02</span> / SKILLS &amp; TOOLING</p>
-        <h2 class="section__title">The <em>stack</em> I work in.</h2>
+    <!-- ============ 02 · ARSENAL ============ -->
+    <section class="sec" id="arsenal" data-label="Arsenal">
+      <div class="sec__head">
+        <p class="kick"><span>02</span> / ARSENAL <em>· skills &amp; tooling</em></p>
+        <h2 class="sec__title scramble" data-text="The stack I">The stack I</h2>
+        <h2 class="sec__title sec__title--2">work <em>in.</em></h2>
       </div>
-      <div class="skills">
-        <div class="skillgroup reveal">
-          <p class="skillgroup__label">LANGUAGES</p>
+      <div class="arsenal">
+        <div class="bay">
+          <p class="bay__label"><span>A</span> LANGUAGES</p>
           <ul class="chips">
             <li>Python</li><li>Java</li><li>C / C++</li><li>JavaScript</li>
           </ul>
         </div>
-        <div class="skillgroup reveal">
-          <p class="skillgroup__label">CYBERSECURITY</p>
+        <div class="bay">
+          <p class="bay__label"><span>B</span> CYBERSECURITY</p>
           <ul class="chips">
             <li>Burp Suite</li><li>Nmap</li><li>Wireshark</li><li>Metasploit</li>
           </ul>
         </div>
-        <div class="skillgroup reveal">
-          <p class="skillgroup__label">TOOLS &amp; PLATFORMS</p>
+        <div class="bay">
+          <p class="bay__label"><span>C</span> TOOLS &amp; PLATFORMS</p>
           <ul class="chips">
             <li>Git</li><li>Docker</li><li>Linux</li><li>WSL</li><li>AWS</li>
           </ul>
@@ -192,16 +214,17 @@
       </div>
     </section>
 
-    <!-- ============ 03 · EXPERIENCE ============ -->
-    <section class="section" id="experience" data-index="03" data-label="Experience">
-      <div class="section__head">
-        <p class="kicker"><span>03</span> / EXPERIENCE</p>
-        <h2 class="section__title">Where I've <em>built</em> &amp; broken things.</h2>
+    <!-- ============ 03 · FIELD LOG ============ -->
+    <section class="sec" id="fieldlog" data-label="Field Log">
+      <div class="sec__head">
+        <p class="kick"><span>03</span> / FIELD LOG <em>· experience</em></p>
+        <h2 class="sec__title scramble" data-text="Where I've built">Where I've built</h2>
+        <h2 class="sec__title sec__title--2">&amp; <em>broken</em> things.</h2>
       </div>
-      <div class="timeline">
-        <article class="tl reveal">
-          <div class="tl__when">Present</div>
-          <div class="tl__body">
+      <div class="log">
+        <article class="log__row">
+          <div class="log__meta"><span class="log__id">LOG_001</span><span class="log__when">PRESENT</span></div>
+          <div class="log__body">
             <h3>Co-Founder &amp; CTO <span>· Okynus.tech Pvt. Ltd.</span></h3>
             <ul>
               <li>Co-founded Okynus.tech and lead it as CTO — taking an early project all the way to a working product and a company.</li>
@@ -210,9 +233,9 @@
             </ul>
           </div>
         </article>
-        <article class="tl reveal">
-          <div class="tl__when">May – Jun 2024</div>
-          <div class="tl__body">
+        <article class="log__row">
+          <div class="log__meta"><span class="log__id">LOG_002</span><span class="log__when">MAY – JUN 2024</span></div>
+          <div class="log__body">
             <h3>Cybersecurity Intern <span>· C-DAC</span></h3>
             <ul>
               <li>Hands-on experience with ethical hacking and penetration testing on real-world scenarios and a live project.</li>
@@ -220,9 +243,9 @@
             </ul>
           </div>
         </article>
-        <article class="tl reveal">
-          <div class="tl__when">May 2026</div>
-          <div class="tl__body">
+        <article class="log__row">
+          <div class="log__meta"><span class="log__id">LOG_003</span><span class="log__when">MAY 2026</span></div>
+          <div class="log__body">
             <h3>Participant — IDE Bootcamp <span>· NEHU, Shillong</span></h3>
             <ul>
               <li>Hands-on bootcamp on building a startup from scratch, with sessions led by industry experts.</li>
@@ -233,82 +256,78 @@
       </div>
     </section>
 
-    <!-- ============ 04 · PROJECTS ============ -->
-    <section class="section" id="projects" data-index="04" data-label="Projects">
-      <div class="section__head">
-        <p class="kicker"><span>04</span> / SELECTED PROJECTS</p>
-        <h2 class="section__title">Things I've <em>made</em>.</h2>
+    <!-- ============ 04 · BUILDS ============ -->
+    <section class="sec" id="builds" data-label="Builds">
+      <div class="sec__head">
+        <p class="kick"><span>04</span> / BUILDS <em>· selected projects</em></p>
+        <h2 class="sec__title scramble" data-text="Things I've">Things I've</h2>
+        <h2 class="sec__title sec__title--2"><em>made.</em></h2>
       </div>
-      <div class="projects">
-        <article class="project reveal">
-          <div class="project__top">
-            <span class="project__tag">WORLDS</span>
-            <span class="project__no">01</span>
-          </div>
-          <div class="project__ico">🗂️</div>
+      <div class="builds">
+        <article class="build">
+          <div class="build__top"><span>EDU_PLATFORM</span><span>BUILD_01</span></div>
+          <div class="build__ico">🗂️</div>
           <h3>LearnLog</h3>
           <p>
             An interactive learning platform that connects educators
             (admins/teachers) with learners (students), using a hierarchical
             file-system approach to organize course content.
           </p>
-          <ul class="project__meta"><li>Education</li><li>File System</li><li>Full-Stack</li></ul>
+          <ul class="tagrow"><li>Education</li><li>File System</li><li>Full-Stack</li></ul>
         </article>
-        <article class="project reveal">
-          <div class="project__top">
-            <span class="project__tag">SYSTEMS</span>
-            <span class="project__no">02</span>
-          </div>
-          <div class="project__ico">🧭</div>
+        <article class="build">
+          <div class="build__top"><span>PRODUCTIVITY</span><span>BUILD_02</span></div>
+          <div class="build__ico">🧭</div>
           <h3>Axis</h3>
           <p>
             A personal task manager and scheduler to help organize day-to-day
             activities and keep track of progress toward goals.
           </p>
-          <ul class="project__meta"><li>Productivity</li><li>Scheduler</li><li>App</li></ul>
+          <ul class="tagrow"><li>Productivity</li><li>Scheduler</li><li>App</li></ul>
         </article>
       </div>
     </section>
 
-    <!-- ============ 05 · RECOGNITION ============ -->
-    <section class="section" id="recognition" data-index="05" data-label="Recognition">
-      <div class="section__head">
-        <p class="kicker"><span>05</span> / RECOGNITION &amp; CERTIFICATIONS</p>
-        <h2 class="section__title">Proof of <em>work</em>.</h2>
+    <!-- ============ 05 · CREDENTIALS ============ -->
+    <section class="sec" id="credentials" data-label="Credentials">
+      <div class="sec__head">
+        <p class="kick"><span>05</span> / CREDENTIALS <em>· recognition &amp; certs</em></p>
+        <h2 class="sec__title scramble" data-text="Proof of">Proof of</h2>
+        <h2 class="sec__title sec__title--2"><em>work.</em></h2>
       </div>
-      <div class="recog">
-        <div class="recog__col reveal">
-          <p class="recog__label">🏆 ACHIEVEMENTS</p>
-          <article class="entry">
+      <div class="creds">
+        <div class="creds__col">
+          <p class="creds__label">▲ ACHIEVEMENTS</p>
+          <article class="rec">
             <h3>Runner-Up</h3>
-            <p class="entry__sub">UptoSkills Startup-a-thon</p>
+            <p class="rec__sub">UptoSkills Startup-a-thon</p>
             <p>2nd of 170 teams &amp; 700+ participants across 150 universities.</p>
           </article>
-          <article class="entry">
+          <article class="rec">
             <h3>Cohort 6</h3>
-            <p class="entry__sub">C3iHub, IIT Kanpur</p>
-            <p>Selected for &amp; incubated under the Cybersecurity Incubation Program (SIIC, IIT Kanpur).</p>
+            <p class="rec__sub">C3iHub, IIT Kanpur</p>
+            <p>Selected &amp; incubated under the Cybersecurity Incubation Program (SIIC, IIT Kanpur).</p>
           </article>
-          <article class="entry">
+          <article class="rec">
             <h3>SSIP Gujarat 2.0</h3>
-            <p class="entry__sub">Student Startup &amp; Innovation Policy</p>
+            <p class="rec__sub">Student Startup &amp; Innovation Policy</p>
             <p>Incubation support under the Student Startup &amp; Innovation Policy.</p>
           </article>
         </div>
-        <div class="recog__col reveal">
-          <p class="recog__label">📜 CERTIFICATIONS</p>
-          <article class="entry">
-            <p class="entry__date">Dec 2025</p>
+        <div class="creds__col">
+          <p class="creds__label">■ CERTIFICATIONS</p>
+          <article class="rec">
+            <p class="rec__date">DEC 2025</p>
             <h3>Belkasoft</h3>
             <p>Effective Artificial Intelligence in DFIR.</p>
           </article>
-          <article class="entry">
-            <p class="entry__date">Jan 2026</p>
+          <article class="rec">
+            <p class="rec__date">JAN 2026</p>
             <h3>AWS Academy Graduate</h3>
             <p>Cloud Developing.</p>
           </article>
-          <article class="entry">
-            <p class="entry__date">Jan 2026</p>
+          <article class="rec">
+            <p class="rec__date">JAN 2026</p>
             <h3>AWS Academy Graduate</h3>
             <p>Cloud Security Foundations.</p>
           </article>
@@ -316,63 +335,56 @@
       </div>
     </section>
 
-    <!-- ============ 06 · BEYOND ============ -->
-    <section class="section" id="beyond" data-index="06" data-label="Beyond">
-      <div class="section__head">
-        <p class="kicker"><span>06</span> / BEYOND THE DESK</p>
-        <h2 class="section__title">Off the <em>keyboard</em>.</h2>
+    <!-- ============ 06 · OFF-DUTY ============ -->
+    <section class="sec" id="offduty" data-label="Off-Duty">
+      <div class="sec__head">
+        <p class="kick"><span>06</span> / OFF-DUTY <em>· beyond the desk</em></p>
+        <h2 class="sec__title scramble" data-text="Off the">Off the</h2>
+        <h2 class="sec__title sec__title--2"><em>keyboard.</em></h2>
       </div>
-      <div class="beyond">
-        <article class="minicard reveal">
-          <span class="minicard__ico">🎖️</span>
-          <h3>NCC Cadet</h3>
+      <div class="offduty">
+        <article class="card">
+          <span class="card__no">/01</span>
+          <h3>🎖️ NCC Cadet</h3>
           <p>2 GUJ Independent Company, Gandhinagar.</p>
         </article>
-        <article class="minicard reveal">
-          <span class="minicard__ico">🏃</span>
-          <h3>Half Marathon</h3>
+        <article class="card">
+          <span class="card__no">/02</span>
+          <h3>🏃 Half Marathon</h3>
           <p>Completed 21 km in about 2 hours 47 minutes.</p>
         </article>
-        <article class="minicard reveal">
-          <span class="minicard__ico">🤝</span>
-          <h3>IIC Regional Meet 2025</h3>
+        <article class="card">
+          <span class="card__no">/03</span>
+          <h3>🤝 IIC Regional Meet 2025</h3>
           <p>Participant — VVP Engineering College, Rajkot.</p>
         </article>
       </div>
     </section>
 
     <!-- ============ 07 · CONTACT ============ -->
-    <section class="section section--contact" id="contact" data-index="07" data-label="Contact">
-      <div class="section__head">
-        <p class="kicker"><span>07</span> / WHAT'S NEXT</p>
+    <section class="sec sec--contact" id="contact" data-label="Contact">
+      <p class="kick"><span>07</span> / ESTABLISH CONTACT</p>
+      <h2 class="contact__title">Let's build <em>something.</em></h2>
+      <p class="contact__lede">
+        I'm always open to talking security, deep-tech, or a good idea worth
+        building. My inbox is open — reach out and I'll get back to you.
+      </p>
+      <div class="contact__cta">
+        <a class="btn btn--acc" href="mailto:kshitij@okynus.com">Say hello <span class="btn__a">→</span></a>
+        <a class="btn" href="assets/resume.pdf" download>Download résumé</a>
       </div>
-      <div class="contact reveal">
-        <h2 class="contact__title">Let's build <em>something.</em></h2>
-        <p class="contact__lede">
-          I'm always open to talking security, deep-tech, or a good idea worth
-          building. My inbox is open — reach out and I'll get back to you.
-        </p>
-        <div class="contact__cta">
-          <a class="btn btn--primary" href="mailto:kshitij@okynus.com">Say hello <span class="btn__arrow">→</span></a>
-          <a class="btn btn--ghost" href="assets/resume.pdf" download>Download Résumé</a>
-        </div>
+      <div class="contact__links">
+        <a href="https://github.com/sharma-prayash" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a href="mailto:kshitij@okynus.com">EMAIL ↗</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__row">
-      <span class="footer__brand">KSHITIJ SHARMA</span>
-      <nav class="footer__social" aria-label="Social links">
-        <a href="https://github.com/sharma-prayash" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:kshitij@okynus.com">Email</a>
-      </nav>
-    </div>
-    <div class="footer__meta">
-      <span>© <span id="year"></span> Kshitij Sharma</span>
-      <span>Built with HTML · CSS · JS</span>
-    </div>
+  <footer class="foot">
+    <span>KSHITIJ SHARMA</span>
+    <span>© <b id="year"></b> — BUILT WITH HTML · CSS · JS</span>
+    <span>EOF_</span>
   </footer>
 
   <script src="assets/js/main.js"></script>

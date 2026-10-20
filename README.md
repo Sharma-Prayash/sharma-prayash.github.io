@@ -2,9 +2,15 @@
 
 Personal portfolio site. Static HTML / CSS / JS, no build step — deploys to GitHub Pages at `sharma-prayash.github.io`.
 
-## Design
+## Design — "Operator Console"
 
-Visual language referenced from [ArtCraft](https://getartcraft.com/): monochrome grayscale, **Archivo** display headlines with **Instrument Serif** italic accent words, **Geist Mono** technical labels, hairline grid, and a right-edge measurement ruler that tracks scroll progress. Dark by default with a light-theme toggle.
+UI inspiration from [ArtCraft](https://getartcraft.com/), reimagined for a cyber + dev identity:
+
+- **Monochrome base + electric-lime accent** (`--acc: #c6ff3d`); dark by default with a light-theme toggle.
+- **Type:** **Archivo** display, **Instrument Serif** italic accent words, **Geist Mono** technical labels, **Inter** body.
+- **HUD / instrument-panel chrome:** boot sequence, full-bleed blueprint grid, corner registration marks, a live clock (IST) + status readout, a right-edge measurement ruler with live scroll %, rotated edge labels, a left dot-index, and a cursor-following crosshair.
+- **Scramble/decode** effect on every section headline; an animated boot terminal.
+- **Cyber-framed sections:** Identity (`whoami` + dossier), Arsenal (skills), Field Log (experience as `LOG_00x`), Builds (projects), Credentials (recognition & certs), Off-Duty, Contact.
 
 ## Structure
 
