@@ -2,4 +2,7 @@
 Thumbs.db
 *.log
 node_modules/
-resume/
+
+# resume: publish the rendered PDF, keep the LaTeX source out of the public site
+resume/*
+!resume/*.pdf
