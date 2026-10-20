@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=2" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=4" />
 </head>
 <body>
   <!-- ===== Boot / preloader ===== -->
@@ -97,14 +97,7 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero" data-label="Index">
-      <div class="ghost" aria-hidden="true">
-        <span>ALIAS // STRYVER</span>
-        <span>ROLE // DEV · SECURITY</span>
-        <span>BASE // GUJARAT_IN</span>
-        <span>FOCUS // VAPT · NETWORKS · DRM</span>
-        <span>EDU // BTECH_MTECH_CSE · NFSU</span>
-        <span>STATUS // OPEN_TO_WORK</span>
-      </div>
+      <pre class="ghost" id="ghost" aria-hidden="true"></pre>
       <div class="hero__tags">
         <span>// SYSTEM_ONLINE</span>
         <span>LAT 23.2°N · LON 72.6°E</span>
@@ -159,21 +152,38 @@
         <h2 class="sec__title sec__title--2">security <em>instinct.</em></h2>
       </div>
       <div class="idwrap">
-        <div class="idwrap__text">
-          <p>
-            I'm a software developer with a keen interest in cybersecurity,
-            currently pursuing an integrated B.Tech–M.Tech in Computer Science
-            &amp; Engineering with a specialization in cybersecurity.
-          </p>
-          <p>
-            With a strong command of Java and a real interest in computer
-            networks, I'm exploring different areas of security and expanding my
-            knowledge in VAPT. As a co-founder and eager learner, my curiosity
-            also runs into sports, entrepreneurship, and the under-the-hood side
-            of technology.
-          </p>
+        <div class="collage">
+          <figure class="shot shot--a reveal">
+            <div class="shot__frame">
+              <span class="shot__tag">REC ●</span>
+              <img src="assets/img/portrait-1.jpg?v=3" alt="Kshitij Sharma in Shillong, Meghalaya" loading="lazy" width="680" height="1148" />
+            </div>
+            <figcaption><span>FIG_01</span> // SHILLONG_MEG</figcaption>
+          </figure>
+          <figure class="shot shot--b reveal">
+            <div class="shot__frame">
+              <span class="shot__tag">REC ●</span>
+              <img src="assets/img/portrait-2.jpg?v=3" alt="Kshitij Sharma at a heritage temple" loading="lazy" width="680" height="1148" />
+            </div>
+            <figcaption><span>FIG_02</span> // FIELD_VISIT</figcaption>
+          </figure>
         </div>
-        <div class="idwrap__cards">
+        <div class="idcol">
+          <div class="idwrap__text">
+            <p>
+              I'm a software developer with a keen interest in cybersecurity,
+              currently pursuing an integrated B.Tech–M.Tech in Computer Science
+              &amp; Engineering with a specialization in cybersecurity.
+            </p>
+            <p>
+              With a strong command of Java and a real interest in computer
+              networks, I'm exploring different areas of security and expanding my
+              knowledge in VAPT. As a co-founder and eager learner, my curiosity
+              also runs into sports, entrepreneurship, and the under-the-hood side
+              of technology.
+            </p>
+          </div>
+          <div class="idwrap__cards">
           <article class="card">
             <span class="card__no">/01</span>
             <h3>NFSU, Gandhinagar</h3>
@@ -189,6 +199,7 @@
             <h3>Based in Gujarat, India</h3>
             <p>Open to security &amp; dev opportunities</p>
           </article>
+          </div>
         </div>
       </div>
     </section>
@@ -395,6 +406,6 @@
     <span>EOF_</span>
   </footer>
 
-  <script src="assets/js/main.js?v=2"></script>
+  <script src="assets/js/main.js?v=4"></script>
 </body>
 </html>

@@ -288,15 +288,16 @@ main { position: relative; z-index: 3; max-width: var(--maxw); margin: 0 auto;
 .btn--acc { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); font-weight: 500; }
 .btn--acc:hover { background: transparent; color: var(--acc); border-color: var(--acc); }
 
-/* ===== GHOST (dossier moved to faint background text) ===== */
-.ghost { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; user-select: none;
-  display: flex; flex-direction: column; justify-content: center; gap: 0.05em;
-  font-family: var(--fm); font-weight: 500; text-transform: uppercase; white-space: nowrap;
-  font-size: clamp(30px, 7.4vw, 94px); line-height: 1.04; letter-spacing: -0.02em;
-  color: var(--ink); opacity: 0.045;
-  -webkit-mask-image: linear-gradient(90deg, #000 60%, transparent);
-  mask-image: linear-gradient(90deg, #000 60%, transparent); }
-:root[data-theme="light"] .ghost { opacity: 0.07; }
+/* ===== GHOST (dossier hidden in a steganographic hex dump) ===== */
+.ghost { position: absolute; inset: 0; z-index: 0; margin: 0; overflow: hidden; pointer-events: none; user-select: none;
+  font-family: var(--fm); font-weight: 400; white-space: pre; tab-size: 2;
+  font-size: clamp(9px, 0.92vw, 12px); line-height: 1.5; letter-spacing: 0;
+  color: var(--ink-3); opacity: 0.17;
+  padding: clamp(80px, 12vh, 120px) 0 0 var(--pad);
+  -webkit-mask-image: linear-gradient(95deg, #000 48%, transparent 90%);
+  mask-image: linear-gradient(95deg, #000 48%, transparent 90%); }
+.ghost .sig { color: var(--ink); }           /* the hidden message: signal just above noise */
+:root[data-theme="light"] .ghost { opacity: 0.22; }
 .hero__main { position: relative; z-index: 1; }
 .hero__tags { z-index: 1; }
 
@@ -326,9 +327,29 @@ main { position: relative; z-index: 3; max-width: var(--maxw); margin: 0 auto;
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ===== IDENTITY ===== */
-.idwrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
+.idwrap { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
+.idcol { display: flex; flex-direction: column; gap: clamp(22px, 3vw, 38px); }
 .idwrap__text p { color: var(--ink-2); font-size: clamp(14px, 1.3vw, 16px); margin-bottom: 16px; max-width: 52ch; }
 .idwrap__cards { display: grid; gap: 12px; }
+
+/* ----- photo collage ----- */
+.collage { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.shot { margin: 0; }
+.shot--b { margin-top: 46px; }
+.shot__frame { position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--panel-2); }
+.shot__frame img { display: block; width: 100%; height: auto;
+  filter: grayscale(1) contrast(1.05) brightness(0.95);
+  transition: filter 0.6s var(--e), transform 1s var(--e); }
+.shot:hover .shot__frame img { filter: grayscale(0) contrast(1); transform: scale(1.045); }
+.shot__frame::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--acc); mix-blend-mode: overlay; opacity: 0.12; transition: opacity 0.6s var(--e); }
+.shot:hover .shot__frame::after { opacity: 0; }
+.shot__frame::before { content: ""; position: absolute; top: 8px; left: 8px; width: 15px; height: 15px; z-index: 2;
+  border-top: 1px solid var(--acc); border-left: 1px solid var(--acc); opacity: 0.85; }
+.shot__tag { position: absolute; top: 8px; right: 8px; z-index: 2; font-family: var(--fm); font-size: 8.5px;
+  letter-spacing: 0.14em; color: var(--acc); opacity: 0.85; }
+.shot figcaption { font-family: var(--fm); font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em; margin-top: 9px; }
+.shot figcaption span { color: var(--acc); }
 
 /* ===== Cards (identity / offduty) ===== */
 .card { border: 1px solid var(--line); padding: 20px; position: relative;
@@ -430,4 +451,5 @@ main { position: relative; z-index: 3; max-width: var(--maxw); margin: 0 auto;
   .log__meta { flex-direction: row; gap: 12px; }
   .hero__tags { position: static; margin-bottom: 18px; }
   .foot { flex-direction: column; gap: 6px; }
+  .shot--b { margin-top: 0; }
 }

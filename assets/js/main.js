@@ -150,6 +150,47 @@
     }
   }
 
+  /* ---- steganographic hex-dump background (dossier hidden in plain sight) ---- */
+  (function buildStego() {
+    const el = $("#ghost"); if (!el) return;
+    const secrets = [
+      "KSHITIJ SHARMA",
+      "ALIAS: stryver",
+      "ROLE: dev + security",
+      "BASE: gujarat, in",
+      "FOCUS: vapt networks drm",
+      "EDU: btech-mtech cse @ nfsu",
+      "STATUS: open_to_work",
+      ">> clearance: student"
+    ];
+    const rnd = () => (Math.random() * 256) | 0;
+    const data = [];
+    const noise = (n) => { for (let i = 0; i < n; i++) data.push({ b: rnd(), s: false }); };
+    noise(22);
+    secrets.forEach((s) => {
+      for (let i = 0; i < s.length; i++) data.push({ b: s.charCodeAt(i), s: true });
+      noise(5 + ((Math.random() * 7) | 0));
+    });
+    while (data.length < 64 * 16) data.push({ b: rnd(), s: false }); // fill + overflow (clipped)
+
+    const hx = (n, w) => n.toString(16).toUpperCase().padStart(w, "0");
+    const esc = (c) => c === "&" ? "&amp;" : c === "<" ? "&lt;" : c === ">" ? "&gt;" : c;
+    let html = "", off = 0;
+    for (let i = 0; i < data.length; i += 16) {
+      const row = data.slice(i, i + 16);
+      let hex = "", asc = "";
+      for (let j = 0; j < 16; j++) {
+        hex += hx(row[j].b, 2) + (j === 7 ? "  " : " ");
+        const p = row[j].b >= 32 && row[j].b <= 126;
+        const ch = p ? esc(String.fromCharCode(row[j].b)) : ".";
+        asc += (row[j].s && p) ? '<span class="sig">' + ch + "</span>" : ch;
+      }
+      html += hx(off, 5) + "  " + hex + " |" + asc + "|\n";
+      off += 16;
+    }
+    el.innerHTML = html;
+  })();
+
   /* ---- scroll: ruler %, active section, edge, dots ---- */
   const cursor = $("#rulerCursor"), pct = $("#rulerPct"), edge = $("#edge");
   const dots = $$(".dots a");
@@ -263,10 +304,8 @@
     term.addEventListener("mousedown", (e) => { if (e.target !== input) { /* keep selection if dragging text */ } });
     term.addEventListener("click", (e) => { if (window.getSelection().toString() === "") input.focus(); });
 
-    // intro: banner + auto-run whoami, then hand over the prompt
+    // intro: single banner line, then hand over a clean prompt
     print("portfolio shell v1.0 — type `help` for commands, `ls` to explore.", "term__muted");
-    echo("whoami");
-    print(commands.whoami());
     toBottom();
   }
 
