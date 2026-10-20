@@ -391,7 +391,7 @@ main { position: relative; z-index: 3; max-width: var(--maxw); margin: 0 auto;
 .build { padding: 26px 28px; border-right: 1px solid var(--line); display: flex; flex-direction: column;
   position: relative; overflow: hidden; transition: background .35s var(--e); }
 .build:last-child { border-right: none; }
-.build::after { content: ""; position: absolute; inset: 0; background: radial-gradient(420px 220px at 100% 0%, var(--acc-glow), transparent 70%); opacity: 0; transition: opacity .4s var(--e); }
+.build::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(420px 220px at 100% 0%, var(--acc-glow), transparent 70%); opacity: 0; transition: opacity .4s var(--e); }
 .build:hover { background: color-mix(in srgb, var(--panel) 40%, transparent); }
 .build:hover::after { opacity: 1; }
 .build__top { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-3); letter-spacing: 0.12em; margin-bottom: 22px; }
