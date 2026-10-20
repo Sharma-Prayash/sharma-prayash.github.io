@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=2" />
 </head>
 <body>
   <!-- ===== Boot / preloader ===== -->
@@ -97,6 +97,14 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero" data-label="Index">
+      <div class="ghost" aria-hidden="true">
+        <span>ALIAS // STRYVER</span>
+        <span>ROLE // DEV · SECURITY</span>
+        <span>BASE // GUJARAT_IN</span>
+        <span>FOCUS // VAPT · NETWORKS · DRM</span>
+        <span>EDU // BTECH_MTECH_CSE · NFSU</span>
+        <span>STATUS // OPEN_TO_WORK</span>
+      </div>
       <div class="hero__tags">
         <span>// SYSTEM_ONLINE</span>
         <span>LAT 23.2°N · LON 72.6°E</span>
@@ -121,22 +129,22 @@
         </div>
       </div>
 
-      <!-- dossier + terminal -->
+      <!-- interactive terminal -->
       <aside class="hero__side">
-        <div class="dossier">
-          <div class="dossier__head"><span>DOSSIER</span><span>REF-07</span></div>
-          <dl class="dossier__rows">
-            <div><dt>ALIAS</dt><dd>stryver</dd></div>
-            <div><dt>ROLE</dt><dd>Dev · Security</dd></div>
-            <div><dt>BASE</dt><dd>Gujarat, IN</dd></div>
-            <div><dt>FOCUS</dt><dd>VAPT · Networks · DRM</dd></div>
-            <div><dt>EDU</dt><dd>B.Tech–M.Tech CSE · NFSU</dd></div>
-            <div><dt>STATUS</dt><dd class="ok">Open to work</dd></div>
-          </dl>
-        </div>
-        <div class="terminal">
-          <div class="terminal__bar"><i></i><i></i><i></i><span>stryver@portfolio: ~</span></div>
-          <div class="terminal__body" id="term"></div>
+        <div class="terminal" id="terminal">
+          <div class="terminal__bar">
+            <i></i><i></i><i></i>
+            <span>stryver@portfolio: ~</span>
+            <b class="terminal__hint" id="termHint">click · type <u>help</u></b>
+          </div>
+          <div class="terminal__body" id="term">
+            <div class="term__out" id="termOut"></div>
+            <form class="term__line" id="termForm" autocomplete="off">
+              <label class="pr" for="termIn">stryver@portfolio:~$</label>
+              <input class="term__in" id="termIn" type="text" spellcheck="false"
+                     autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="terminal input" />
+            </form>
+          </div>
         </div>
       </aside>
 
@@ -387,6 +395,6 @@
     <span>EOF_</span>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=2"></script>
 </body>
 </html>

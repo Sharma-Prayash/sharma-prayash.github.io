@@ -191,48 +191,83 @@
     })();
   }
 
-  /* ---- terminal ---- */
+  /* ---- interactive terminal ---- */
   let termStarted = false;
   function startTerminal() {
     if (termStarted) return; termStarted = true;
-    const body = $("#term"); if (!body) return;
-    const lines = [
-      { t: "cmd", x: "whoami" },
-      { t: "out", x: "developer · security-student" },
-      { t: "cmd", x: "cat focus.txt" },
-      { t: "out", x: "Java · Networks · VAPT · DRM" },
-      { t: "cmd", x: "ls roles/" },
-      { t: "out", x: "co-founder  cto  builder" },
-      { t: "cmd", x: "echo $MINDSET" },
-      { t: "out", x: "understand the why, not just the how" },
-    ];
-    const PR = '<span class="pr">stryver@portfolio:~$</span> ';
-    let li = 0;
-    function add() {
-      if (li >= lines.length) { caret(); return; }
-      const l = lines[li], d = document.createElement("div");
-      if (l.t === "cmd") {
-        d.className = "cmd"; d.innerHTML = PR + '<span class="in"></span>';
-        body.appendChild(d);
-        type(d.querySelector(".in"), l.x, () => { li++; setTimeout(add, 300); });
-      } else {
-        d.className = "ou"; d.textContent = l.x; body.appendChild(d); li++; setTimeout(add, 240);
+    const body = $("#term"), out = $("#termOut"), form = $("#termForm"),
+          input = $("#termIn"), term = $("#terminal"), hint = $("#termHint");
+    if (!body || !out || !form || !input) return;
+
+    // virtual filesystem
+    const FS = {
+      "about.txt":   "Kshitij Sharma — software developer & security student.\nIntegrated B.Tech–M.Tech CSE (Cybersecurity) @ NFSU, Gandhinagar.\nCo-Founder & CTO @ Okynus.tech. Based in Gujarat, India.",
+      "focus.txt":   "Java · Computer Networks · VAPT · DRM / anti-piracy",
+      "roles.txt":   "co-founder   cto   developer   builder\nOkynus.tech — DRM & anti-piracy software",
+      "skills.txt":  "lang    Python  Java  C/C++  JavaScript\nsec     Burp Suite  Nmap  Wireshark  Metasploit\ntools   Git  Docker  Linux  WSL  AWS",
+      "contact.txt": "email      kshitij@okynus.com\ngithub     github.com/sharma-prayash\nlinkedin   linkedin.com/in/  (coming soon)",
+      "resume.pdf":  "<binary> — use the “Download résumé” button in the Contact section ↓"
+    };
+    const FILES = Object.keys(FS);
+    const hist = []; let hp = 0;
+
+    function echo(cmd) {
+      const d = document.createElement("div");
+      const p = document.createElement("span"); p.className = "pr"; p.textContent = "stryver@portfolio:~$";
+      const c = document.createElement("span"); c.className = "in"; c.textContent = " " + cmd;
+      d.appendChild(p); d.appendChild(c); out.appendChild(d);
+    }
+    function print(text, cls) {
+      const d = document.createElement("div"); d.className = "ou" + (cls ? " " + cls : "");
+      d.textContent = text; out.appendChild(d);
+    }
+    function toBottom() { body.scrollTop = body.scrollHeight; }
+
+    const commands = {
+      help() { return "available commands\n  whoami         who you’re talking to\n  ls             list files\n  cat <file>     read a file\n  clear          clear the screen\n  help           show this list\n\ntip: try  cat about.txt"; },
+      whoami() { return "Kshitij Sharma · developer & security student · Co-Founder/CTO @ Okynus.tech\nrun `ls` to see files, then `cat <file>` to read one."; },
+      ls() { return FILES.join("   "); },
+      pwd() { return "/home/stryver"; },
+      date() { return new Date().toString(); },
+      sudo() { return "nice try — this incident will be reported. 😏"; },
+      clear() { out.innerHTML = ""; return null; },
+      cat(arg) {
+        if (!arg) return "usage: cat <file>\nfiles: " + FILES.join(", ");
+        if (Object.prototype.hasOwnProperty.call(FS, arg)) return FS[arg];
+        return "cat: " + arg + ": No such file or directory";
       }
-      body.scrollTop = body.scrollHeight;
+    };
+
+    function run(raw) {
+      const cmd = raw.trim();
+      echo(cmd);
+      if (cmd) {
+        hist.push(cmd); hp = hist.length;
+        const parts = cmd.split(/\s+/);
+        const name = parts[0].toLowerCase();
+        const fn = commands[name];
+        const res = fn ? fn(parts.slice(1).join(" ")) : ("command not found: " + parts[0] + "   —   type `help`");
+        if (res != null) print(res);
+      }
+      toBottom();
     }
-    function type(el, txt, done) {
-      if (RM) { el.textContent = txt; done(); return; }
-      let i = 0;
-      (function tk2() {
-        if (i <= txt.length) { el.textContent = txt.slice(0, i); i++; body.scrollTop = body.scrollHeight; setTimeout(tk2, 40); }
-        else done();
-      })();
-    }
-    function caret() {
-      const d = document.createElement("div"); d.className = "cmd";
-      d.innerHTML = PR + '<span class="cur"></span>'; body.appendChild(d); body.scrollTop = body.scrollHeight;
-    }
-    setTimeout(add, 400);
+
+    // interactions
+    form.addEventListener("submit", (e) => { e.preventDefault(); const v = input.value; input.value = ""; run(v); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") { e.preventDefault(); if (hp > 0) { hp--; input.value = hist[hp] || ""; } }
+      else if (e.key === "ArrowDown") { e.preventDefault(); if (hp < hist.length) { hp++; input.value = hist[hp] || ""; } }
+      else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); commands.clear(); }
+    });
+    input.addEventListener("focus", () => hint && hint.classList.add("hide"));
+    term.addEventListener("mousedown", (e) => { if (e.target !== input) { /* keep selection if dragging text */ } });
+    term.addEventListener("click", (e) => { if (window.getSelection().toString() === "") input.focus(); });
+
+    // intro: banner + auto-run whoami, then hand over the prompt
+    print("portfolio shell v1.0 — type `help` for commands, `ls` to explore.", "term__muted");
+    echo("whoami");
+    print(commands.whoami());
+    toBottom();
   }
 
   /* ---- smooth anchors with offset ---- */
